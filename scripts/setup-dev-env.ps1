@@ -183,6 +183,7 @@ function Get-GitHubReleaseAssetDownloadInfo {
     'User-Agent' = 'renodx-setup'
     'Accept' = 'application/vnd.github+json'
   }
+  if ($env:GITHUB_TOKEN) { $headers['Authorization'] = "Bearer $($env:GITHUB_TOKEN)" }
   $releaseApiUrl = "https://api.github.com/repos/$Repo/releases/tags/$Tag"
   $originalSecurityProtocol = [Net.ServicePointManager]::SecurityProtocol
 

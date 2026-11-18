@@ -2,6 +2,8 @@ name: Build Tekken 8 (hue slider)
 
 on:
   workflow_dispatch:
+  push:
+    branches: [tekken8-hue-slider]
 
 jobs:
   build:

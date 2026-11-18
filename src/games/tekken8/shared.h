@@ -20,7 +20,7 @@ struct ShaderInjectData {
   float tone_map_per_channel;
   float scene_grade_saturation_correction;
   float scene_grade_blowout_restoration;
-  float scene_grade_hue_correction;
+  float custom_vanilla_hue;  // reuses unused scene_grade_hue_correction slot; fields past the root-constant budget are dropped
   float custom_grain_type;
   float custom_grain_strength;
   float custom_random;
@@ -31,7 +31,6 @@ struct ShaderInjectData {
   float custom_is_engine_hdr;
   float custom_hero_light_strength;
   float custom_lights_strength;
-  float custom_vanilla_hue;
 };
 
 #ifndef __cplusplus

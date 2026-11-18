@@ -42,7 +42,6 @@ renodx::utils::settings::Settings settings = renodx::templates::settings::JoinSe
         {"ToneMapScaling", {.binding = &shader_injection.tone_map_per_channel}},
         // {"ToneMapGammaCorrection", {.binding = &shader_injection.tone_map_gamma_correction, .labels = {"2.2", "BT.1886"}, .parse = [](float value) { return value + 1.f; }, .is_visible = []() { return renodx::templates::settings::current_settings_mode >= 2; }}},
         /* {"SceneGradeSaturationCorrection", &shader_injection.scene_grade_saturation_correction},
-        {"SceneGradeHueCorrection", &shader_injection.scene_grade_hue_correction},
         {"SceneGradeBlowoutRestoration", &shader_injection.scene_grade_blowout_restoration}, */
         {"ColorGradeExposure", {.binding = &shader_injection.tone_map_exposure, .default_value = 0.75f}},
         {"ColorGradeHighlights", {.binding = &shader_injection.tone_map_highlights}},

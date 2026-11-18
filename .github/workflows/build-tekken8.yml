@@ -17,7 +17,7 @@ jobs:
         shell: pwsh
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: .\scripts\setup-dev-env.ps1 -Update -Tools dxc,slang,glslang,spirv-tools
+        run: .\scripts\setup-dev-env.ps1 -Update -Tools dxc,slang,glslang
 
       - name: Set up Clang
         uses: egor-tensin/setup-clang@v1

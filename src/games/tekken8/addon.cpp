@@ -40,7 +40,6 @@ renodx::utils::settings::Settings settings = renodx::templates::settings::JoinSe
         {"ToneMapGameNits", {.binding = &shader_injection.diffuse_white_nits}},
         {"ToneMapUINits", {.binding = &shader_injection.graphics_white_nits}},
         {"ToneMapScaling", {.binding = &shader_injection.tone_map_per_channel}},
-        {"ToneMapHueCorrection", {.binding = &shader_injection.tone_map_hue_correction}},
         // {"ToneMapGammaCorrection", {.binding = &shader_injection.tone_map_gamma_correction, .labels = {"2.2", "BT.1886"}, .parse = [](float value) { return value + 1.f; }, .is_visible = []() { return renodx::templates::settings::current_settings_mode >= 2; }}},
         /* {"SceneGradeSaturationCorrection", &shader_injection.scene_grade_saturation_correction},
         {"SceneGradeHueCorrection", &shader_injection.scene_grade_hue_correction},
@@ -55,6 +54,16 @@ renodx::utils::settings::Settings settings = renodx::templates::settings::JoinSe
         {"ColorGradeFlare", {.binding = &shader_injection.tone_map_flare}},
     }),
     {
+        new renodx::utils::settings::Setting{
+            .key = "VanillaHue",
+            .binding = &shader_injection.custom_vanilla_hue,
+            .default_value = 0.f,
+            .label = "Vanilla Effect Hue",
+            .section = "Tone Mapping",
+            .tooltip = "Restores the original game hue of bright effects (e.g. purple lightning) while keeping HDR brightness.",
+            .max = 100.f,
+            .parse = [](float value) { return value * 0.01f; },
+        },
         new renodx::utils::settings::Setting{
             .key = "lightStrength",
             .binding = &shader_injection.custom_lights_strength,

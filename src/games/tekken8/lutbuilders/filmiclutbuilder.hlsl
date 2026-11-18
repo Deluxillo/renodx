@@ -331,6 +331,16 @@ void ApplyFilmicToneMap(
     tonemapped = renodx::color::ap1::from::BT709(ApplySaturationBlowoutHueCorrectionHighlightSaturation(renodx::color::bt709::from::AP1(tonemapped), renodx::color::bt709::from::AP1(LerpToneMapStrength(untonemapped, float3(preRRT_r, preRRT_g, preRRT_b))), untonemapped_lum, cg_config));
   }
 
+  // Pull hue toward the vanilla SDR tonemap (includes UE blue correction) while keeping HDR luminance and chroma
+  if (CUSTOM_VANILLA_HUE > 0.f && RENODX_TONE_MAP_TYPE != 4.f && RENODX_TONE_MAP_TYPE != 0.f) {
+    float3 perceptual = renodx::color::oklab::from::BT709(renodx::color::bt709::from::AP1(tonemapped));
+    float3 perceptual_vanilla = renodx::color::oklab::from::BT709(renodx::color::bt709::from::AP1(max(0, ApplyVanillaToneMap(untonemapped, float3(preRRT_r, preRRT_g, preRRT_b)))));
+    float chrominance = length(perceptual.yz);
+    perceptual.yz = lerp(perceptual.yz, perceptual_vanilla.yz, CUSTOM_VANILLA_HUE);
+    perceptual.yz *= renodx::math::DivideSafe(chrominance, length(perceptual.yz), 1.f);
+    tonemapped = renodx::color::ap1::from::BT709(renodx::color::bt709::clamp::AP1(renodx::color::bt709::from::OkLab(perceptual)));
+  }
+
   r = tonemapped.r, g = tonemapped.g, b = tonemapped.b;
   return;
 }

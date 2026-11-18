@@ -31,6 +31,7 @@ struct ShaderInjectData {
   float custom_is_engine_hdr;
   float custom_hero_light_strength;
   float custom_lights_strength;
+  float tone_map_hue_correction;
 };
 
 #ifndef __cplusplus
@@ -57,6 +58,7 @@ cbuffer shader_injection : register(b13) {
 #define RENODX_TONE_MAP_HIGHLIGHT_SATURATION   shader_injection.tone_map_highlight_saturation
 #define RENODX_TONE_MAP_BLOWOUT                shader_injection.tone_map_blowout
 #define RENODX_TONE_MAP_FLARE                  shader_injection.tone_map_flare
+#define RENODX_TONE_MAP_HUE_CORRECTION         shader_injection.tone_map_hue_correction
 #define RENODX_RENO_DRT_TONE_MAP_METHOD        renodx::tonemap::renodrt::config::tone_map_method::REINHARD
 #define RENODX_TONE_MAP_PASS_AUTOCORRECTION    1.f
 #define CUSTOM_HERO_LIGHT_STRENGTH             0.25f
